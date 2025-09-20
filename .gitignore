@@ -31,3 +31,4 @@ hs_err_pid*
 /target/test-classes/
 /target/jacoco.exec
 /target/untitled-1.0-SNAPSHOT.jar
+.idea/

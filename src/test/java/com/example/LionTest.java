@@ -21,43 +21,50 @@ public class LionTest {
     @Mock
     private Feline felineMock;
 
-    @Test
-    public void testLionHasManeMale() throws Exception {
-        Lion lion = new Lion("Самец", felineMock);
-        assertTrue(lion.doesHaveMane());
-    }
-
-    @Test
-    public void testLionHasNoManeFemale() throws Exception {
-        Lion lion = new Lion("Самка", felineMock);
-        assertFalse(lion.doesHaveMane());
-    }
-
     @Test(expected = Exception.class)
     public void testLionInvalidSex() throws Exception {
         new Lion("Неизвестный", felineMock);
     }
 
-    @Test
-    public void testGetKittens() throws Exception {
+    //Разделил на два теста - проверка значения и проверка вызова метода
+    @Test //проверка значения
+    public void testGetKittensReturnValue() throws Exception {
         when(felineMock.getKittens()).thenReturn(3);
 
         Lion lion = new Lion("Самец", felineMock);
         assertEquals(3, lion.getKittens());
+    }
+
+    @Test //проверка вызова метода
+    public void testGetKittensMethodCall() throws Exception {
+        when(felineMock.getKittens()).thenReturn(3);
+
+        Lion lion = new Lion("Самец", felineMock);
+        lion.getKittens();
         verify(felineMock).getKittens();
     }
 
-    @Test
-    public void testGetFood() throws Exception {
+    //Разделил на два теста - проверка значения и проверка вызова метода
+    @Test //проверка значения
+    public void testGetFoodReturnValue() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         when(felineMock.getFood("Хищник")).thenReturn(expectedFood);
 
         Lion lion = new Lion("Самец", felineMock);
         assertEquals(expectedFood, lion.getFood());
+    }
+
+    @Test //проверка вызова метода
+    public void testGetFoodMethodCall() throws Exception {
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        when(felineMock.getFood("Хищник")).thenReturn(expectedFood);
+
+        Lion lion = new Lion("Самец", felineMock);
+        lion.getFood();
         verify(felineMock).getFood("Хищник");
     }
 
-
+    // убраны обычные тесты дублирующие параметизированный
     @RunWith(Parameterized.class)
     public static class LionParameterizedTest {
         private String sex;

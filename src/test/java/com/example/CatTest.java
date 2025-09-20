@@ -20,14 +20,23 @@ public class CatTest {
         String expectedSound = "Мяу";
         assertEquals(expectedSound, cat.getSound());
     }
-
-    @Test
-    public void testGetFood() throws Exception {
+    //Разделил на два теста - проверка значения и проверка вызова метода
+    @Test //проверка значения
+    public void testGetFoodReturnValue() throws Exception {
         List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
         when(felineMock.eatMeat()).thenReturn(expectedFood);
 
         Cat cat = new Cat(felineMock);
         assertEquals(expectedFood, cat.getFood());
+    }
+
+    @Test // проверка вызова метода
+    public void testGetFoodMethodCall() throws Exception {
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        when(felineMock.eatMeat()).thenReturn(expectedFood);
+
+        Cat cat = new Cat(felineMock);
+        cat.getFood();
         verify(felineMock).eatMeat();
     }
 

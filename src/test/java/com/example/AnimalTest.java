@@ -13,33 +13,13 @@ import static org.junit.Assert.*;
 public class AnimalTest {
 
     @Test
-    public void testGetFoodForPredator() throws Exception {
-        Animal animal = new Animal();
-        List<String> expected = List.of("Животные", "Птицы", "Рыба");
-        assertEquals(expected, animal.getFood("Хищник"));
-    }
-
-    @Test
-    public void testGetFoodForHerbivore() throws Exception {
-        Animal animal = new Animal();
-        List<String> expected = List.of("Трава", "Различные растения");
-        assertEquals(expected, animal.getFood("Травоядное"));
-    }
-
-    @Test(expected = Exception.class)
-    public void testGetFoodForUnknownAnimalKind() throws Exception {
-        Animal animal = new Animal();
-        animal.getFood("Неизвестный");
-    }
-
-    @Test
     public void testGetFamily() {
         Animal animal = new Animal();
         String expected = "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи";
         assertEquals(expected, animal.getFamily());
     }
 
-
+    // убраны обычные тесты дублирующие параметизированный
     @RunWith(Parameterized.class)
     public static class AnimalParameterizedTest {
         private String animalKind;
