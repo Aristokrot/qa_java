@@ -29,15 +29,15 @@ public class LionTest {
     //Разделил на два теста - проверка значения и проверка вызова метода
     @Test //проверка значения
     public void testGetKittensReturnValue() throws Exception {
-        when(felineMock.getKittens()).thenReturn(3);
+        when(felineMock.getKittens()).thenReturn(1);// теперь возвращает 1
 
         Lion lion = new Lion("Самец", felineMock);
-        assertEquals(3, lion.getKittens());
+        assertEquals(1, lion.getKittens());
     }
 
     @Test //проверка вызова метода
     public void testGetKittensMethodCall() throws Exception {
-        when(felineMock.getKittens()).thenReturn(3);
+        when(felineMock.getKittens()).thenReturn(1);
 
         Lion lion = new Lion("Самец", felineMock);
         lion.getKittens();
@@ -86,8 +86,7 @@ public class LionTest {
         @Test
         public void testLionManeParameterized() throws Exception {
             Feline felineMock = mock(Feline.class);
-            when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-            when(felineMock.getKittens()).thenReturn(1);
+            when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));//убрана лишняя строчка
 
             Lion lion = new Lion(sex, felineMock);
             assertEquals(expectedHasMane, lion.doesHaveMane());
